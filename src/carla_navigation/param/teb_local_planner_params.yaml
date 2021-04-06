@@ -1,7 +1,7 @@
 
 TebLocalPlannerROS:
 
- odom_topic: /carla/ego_vehicle/odometry
+ odom_topic: /carla/ego_vehicle/odometry_shifted
     
  # Trajectory
   
