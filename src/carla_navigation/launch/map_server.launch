@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="map_file" default="$(find carla_navigation)/maps/map_global.yaml"/>
+  <arg name="map_file_route" default="$(find carla_navigation)/maps/map_route.yaml"/>
+
+  <!-- Map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
+     <!--remap from="/map" to="/map_global"/-->
+  </node>
+
+  <!--node name="map_server_route" pkg="map_server" type="map_server" args="$(arg map_file_route)">
+     <remap from="/map" to="/map_route"/>
+  </node-->
+</launch>

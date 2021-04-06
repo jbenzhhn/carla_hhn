@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/mbf_msgs_generate_messages_eus"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/MoveBaseFeedback.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/MoveBaseActionResult.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/ExePathResult.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/MoveBaseActionFeedback.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/MoveBaseAction.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/GetPathActionResult.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/RecoveryFeedback.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/GetPathActionFeedback.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/MoveBaseActionGoal.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/ExePathAction.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/GetPathAction.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/ExePathActionFeedback.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/GetPathActionGoal.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/RecoveryActionFeedback.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/RecoveryAction.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/ExePathActionResult.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/RecoveryActionGoal.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/GetPathResult.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/RecoveryActionResult.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/GetPathFeedback.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/ExePathGoal.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/RecoveryGoal.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/GetPathGoal.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/ExePathActionGoal.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/MoveBaseGoal.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/RecoveryResult.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/ExePathFeedback.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/msg/MoveBaseResult.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/srv/CheckPath.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/srv/CheckPoint.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/srv/CheckPose.l"
+  "/home/automotive/catkin_ws/devel/share/roseus/ros/mbf_msgs/manifest.l"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang )
+  include(CMakeFiles/mbf_msgs_generate_messages_eus.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

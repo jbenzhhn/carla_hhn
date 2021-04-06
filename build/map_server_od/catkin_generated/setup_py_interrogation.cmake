@@ -1,0 +1,7 @@
+set(map_server_od_SETUP_PY_SETUP_MODULE "distutils.core")
+set(map_server_od_SETUP_PY_VERSION "0.0.0")
+set(map_server_od_SETUP_PY_SCRIPTS "")
+set(map_server_od_SETUP_PY_PACKAGES "​<package_name>​")
+set(map_server_od_SETUP_PY_PACKAGE_DIRS "include/​<package_name>​")
+set(map_server_od_SETUP_PY_MODULES "")
+set(map_server_od_SETUP_PY_MODULE_DIRS "")

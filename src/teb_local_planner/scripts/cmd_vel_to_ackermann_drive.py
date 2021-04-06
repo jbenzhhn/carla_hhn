@@ -1,0 +1,69 @@
+#!/usr/bin/env python
+
+# Author: christoph.roesmann@tu-dortmund.de
+
+import rospy, math
+from geometry_msgs.msg import Twist
+from ackermann_msgs.msg import AckermannDrive
+
+
+def convert_trans_rot_vel_to_steering_angle(v, omega, wheelbase):
+  if omega == 0 or v == 0:
+    return 0
+
+  radius = v / omega
+  return math.atan(2.875  / radius)
+
+
+def cmd_callback(data):
+  global wheelbase
+  global ackermann_cmd_topic
+  global frame_id
+  global pub
+  global cmd_angle_instead_rotvel
+  
+  v = data.linear.x
+  # if cmd_angle_instead_rotvel is true, the rotational velocity is already converted in the C++ node
+  # in this case this script only needs to do the msg conversion from twist to Ackermann drive
+  #if cmd_angle_instead_rotvel:
+    #steering = data.angular.z
+  #else:
+  steering = convert_trans_rot_vel_to_steering_angle(v, data.angular.z, wheelbase)
+  
+  msg = AckermannDrive()
+  #msg.header.stamp = rospy.Time.now()
+  #msg.header.frame_id = frame_id
+  msg.steering_angle = steering
+  msg.speed = v
+  msg.acceleration= 0
+  msg.jerk = 0
+  pub.publish(msg)
+  
+  msg_twist = Twist()
+  msg_twist = data
+  pub_twist.publish(msg_twist)
+
+
+
+if __name__ == '__main__': 
+  try:
+    
+    rospy.init_node('cmd_vel_to_ackermann_drive')
+        
+    twist_cmd_topic = rospy.get_param('~twist_cmd_topic', '/cmd_vel') 
+    ackermann_cmd_topic = '/carla/ego_vehicle/ackermann_cmd'
+    wheelbase = rospy.get_param('~wheelbase', 2.875)
+    frame_id = rospy.get_param('~frame_id', 'odom')
+    #cmd_angle_instead_rotvel = rospy.get_param('/move_base/TebLocalPlannerROS/cmd_angle_instead_rotvel', False)
+    cmd_angle_instead_rotvel = rospy.get_param('/move_base/TebLocalPlannerROS/cmd_angle_instead_rotvel', True)
+    
+    rospy.Subscriber(twist_cmd_topic, Twist, cmd_callback, queue_size=1)
+    pub = rospy.Publisher(ackermann_cmd_topic, AckermannDrive, queue_size=1)
+    pub_twist = rospy.Publisher('carla/ego_vehicle/ackermann_twist', Twist, queue_size=1)
+    rospy.loginfo("Node 'cmd_vel_to_ackermann_drive' started.\nListening to %s, publishing to %s. Frame id: %s, wheelbase: %f", "/cmd_vel", ackermann_cmd_topic, frame_id, wheelbase)
+    
+    rospy.spin()
+    
+  except rospy.ROSInterruptException:
+    pass
+

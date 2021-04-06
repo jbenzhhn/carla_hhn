@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="map_file" default="$(find carla_navigation)/maps/map_route.yaml"/>
+ 
+  <!-- Map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)"/>
+
+  <!-- Optional pointcloud_to_laserscan node -->
+    <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+
+        <remap from="cloud_in" to="/carla/ego_vehicle/lidar/front/point_cloud"/>
+        <remap from="scan" to="/laser_scan"/>
+        <rosparam>
+            
+            transform_tolerance: 0.01
+            min_height: -1.5
+            max_height: 2.5
+
+            angle_min: -3.14 # -M_PI/2
+            angle_max: 3.14 # M_PI/2
+            angle_increment: 0.0087 # M_PI/360.0
+            scan_time: 0.05
+            range_min: 2.5
+            range_max: 40
+            use_inf: true
+            inf_epsilon: 1.0
+
+            # Concurrency level, affects number of pointclouds queued for processing and number of threads used
+            # 0 : Detect number of cores
+            # 1 : Single threaded
+            # 2->inf : Parallelism level
+            concurrency_level: 1
+        </rosparam>
+
+   </node>
+ 
+
+  <!-- Move base -->
+  <include file="$(find carla_mbf)/launch/includes/move_base.launch.xml"/>
+ 
+</launch>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+ 
+  <node pkg="odom_publish" type="odom.py" name="odom_publish" >
+    <!-- <remap from="robot_description" to="different_robot_description" /> -->
+    <!-- <remap from="joint_states" to="/prius/joint_states" /> -->
+  </node>
+ 
+</launch>

@@ -1,0 +1,8 @@
+prefix=/home/automotive/catkin_ws/install
+
+Name: odom_publish
+Description: Description of odom_publish
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

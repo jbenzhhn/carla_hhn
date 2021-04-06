@@ -1,0 +1,8 @@
+prefix=/home/automotive/catkin_ws/devel
+
+Name: carla_mbf
+Description: Description of carla_mbf
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

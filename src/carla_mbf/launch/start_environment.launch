@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="map_file" default="$(find carla_navigation)/maps/map_global.yaml"/>
+  <arg name="position_of_ego_vehicle"/>
+
+  <!-- Start the odometry publisher -->
+  <node pkg="odom_tf" name="odom_tf" type="odom_tf" output="screen">
+ </node>
+
+  <!-- Start the cmd to ackermann cmd converter -->
+  <node pkg="teb_local_planner" name="cmd_vel_to_ackermann_drive"   
+        type="cmd_vel_to_ackermann_drive.py" output="screen">
+ </node>
+
+  <!-- Spawn ego vehicle -->
+  <node pkg="carla_mbf" name="spawn_ego_vehicle"   
+        type="spawn_ego_vehicle.py" output="screen" args="$(arg position_of_ego_vehicle)">
+ </node>
+
+  <!-- Start ROS Bridge with rviz -->
+ <include file="$(find carla_ros_bridge)/launch/carla_ros_bridge_with_rviz.launch" />
+
+  <!-- Start Carla Ackermann Control -->
+ <include file="$(find carla_ackermann_control)/launch/carla_ackermann_control.launch" />
+
+  <!-- Map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
+     <remap from="/map" to="/map_global"/>
+  </node>
+
+</launch>

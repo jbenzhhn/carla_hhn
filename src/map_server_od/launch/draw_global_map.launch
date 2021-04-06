@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="map_file_global" default="$(find carla_navigation)/maps/map_global.yaml"/>
+
+  <!-- Draw and save global map out of .xodr-file -->
+  <node pkg="map_server_od" name="draw_map" type="draw_global_map.py" output="screen"  >
+  </node>
+  
+</launch>

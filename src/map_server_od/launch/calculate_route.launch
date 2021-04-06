@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<!-- This launch file starts the map server without the Route
+     If you use an new open drive map, pleas start the launch file "draw_global_map " at the beginning (just once) -->
+
+
+<launch>
+  
+  <!-- Start Map server Open Drive to calculate route-->
+  <node pkg="map_server_od" name="opendrive_map_server" type="map_interface.py" output="screen">
+  </node>
+  
+</launch>

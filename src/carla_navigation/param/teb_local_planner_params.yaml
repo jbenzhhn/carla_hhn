@@ -1,0 +1,128 @@
+
+TebLocalPlannerROS:
+
+ odom_topic: /carla/ego_vehicle/odometry
+    
+ # Trajectory
+  
+ teb_autosize: True
+ dt_ref: 0.6 #1.2
+ dt_hysteresis: 0.1
+ max_samples: 500 #250
+ global_plan_overwrite_orientation: True
+ allow_init_with_backwards_motion: False
+ max_global_plan_lookahead_dist: 40 #28.0
+ global_plan_viapoint_sep: 1
+ global_plan_prune_distance: 1
+ exact_arc_length: False
+ feasibility_check_no_poses: 2
+ publish_feedback: False
+ #force_reinit_new_goal_dist: 2
+ control_frequency: 10
+ #control_look_ahead_poses: 5
+    
+ # Robot
+         
+ max_vel_x: 10 #25 #7 #13 # 7=12km/h 13=24km/h 18=32km/h 25=45km/h
+ max_vel_x_backwards: 1 #2
+ max_vel_y: 0.0
+ max_vel_theta: 5 #4 #2 the angular velocity is also bounded by min_turning_radius in case of a carlike robot (r = v / omega)
+ acc_lim_x: 3
+ acc_lim_theta: 2 #0.8 #0.5
+
+
+# ********************** Carlike robot parameters ********************
+ min_turning_radius: 5.5        # Min turning radius of the carlike robot (compute value using a model or adjust with rqt_reconfigure manually)
+ wheelbase: 2.875                 # Wheelbase of our robot
+ cmd_angle_instead_rotvel: True # stage simulator takes the angle instead of the rotvel as input (twist message)
+ # ********************************************************************
+
+ footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
+   type: "line"
+   line_start: [-1.43, 0] # for type "polygon"
+   line_end: [1.43, 0]
+#vertices: [[-0.2, -1], [-0.2, 1], [3.8, 1], [3.8, -1]] 
+ # GoalTolerance
+    
+ xy_goal_tolerance: 0.7
+ yaw_goal_tolerance: 0.35
+ free_goal_vel: False
+ complete_global_plan: True
+    
+ # Obstacles
+ min_obstacle_dist: 1.40 # This value must also include our robot's expansion, since footprint_model is set to "line".
+ inflation_dist: 1.50
+ include_costmap_obstacles: True
+ costmap_obstacles_behind_robot_dist: 1.0
+ obstacle_poses_affected: 20
+
+ dynamic_obstacle_inflation_dist: 0.6
+ include_dynamic_obstacles: True 
+
+ #costmap_converter_plugin: "polygons"
+ #costmap_converter_spin_thread: True
+ #costmap_converter_rate: 5
+
+ # Optimization
+    
+ no_inner_iterations: 5
+ no_outer_iterations: 4
+ optimization_activate: True
+ optimization_verbose: False
+ penalty_epsilon: 0.1
+ obstacle_cost_exponent: 2
+ weight_max_vel_x: 10
+ weight_max_vel_theta: 10
+ weight_acc_lim_x: 10 #10 #450 #1
+ weight_acc_lim_theta: 10 #150
+ weight_kinematics_nh: 1000
+ weight_kinematics_forward_drive: 10
+ weight_kinematics_turning_radius: 1000
+ weight_optimaltime: 0.0001 #0.001 #0.005 #1 #1 #0.01 # must be > 0 # ADJUST: 1 -> 0.5
+ weight_shortest_path: 0 #2.5 #75 #50 #200 # ADJUST: 0 -> 50 to enforce planning in local area
+ weight_obstacle: 1000.0 
+ weight_obstacle_right: 1000 #10 #2.5 #15
+ weight_obstacle_left: 1000 #10 #2.5 #15
+ weight_inflation_right: 10 #0.15 #1 #0.2
+ weight_inflation_left: 10 #0.6 #1 #0.2
+ weight_dynamic_obstacle: 1000 #250 #800 #25 #50 #250 #175 #150 #50 #150
+ weight_dynamic_obstacle_inflation: 0 #0.6
+ weight_viapoint: 25 #2.5
+ weight_adapt_factor: 3 #3.75
+
+ # Homotopy Class Planner
+
+ #max_number_plans_in_current_class: 2
+ enable_homotopy_class_planning: True
+ enable_multithreading: True
+ #simple_exploration: False #necessary? -> no
+ max_number_classes: 3
+ selection_cost_hysteresis: 1 #0.8 # ADJUST: 1 -> 0.8 select new trajectory if new_cost < selection_cost_hysteresis*old_cost. Causes lower chance of changing plan.
+ selection_prefer_initial_plan: 1
+ selection_obst_cost_scale: 1 #1.5 #0.75 #1.5 #0.5 #1.0
+ selection_alternative_time_cost: False
+
+ roadmap_graph_no_samples: 15
+ roadmap_graph_area_width: 9
+ roadmap_graph_area_length_scale: 1.0
+ h_signature_prescaler: 0.5
+ h_signature_threshold: 0.1
+ obstacle_heading_threshold: 0.45
+ switching_blocking_period: 0.0
+ viapoints_all_candidates: True
+ #via_points_ordered: True
+ selection_viapoint_cost_scale: 1
+ delete_detours_backwards: True
+ max_ratio_detours_duration_best_duration: 3.0
+ visualize_hc_graph: False # ADJUST: False (only visualization)
+ visualize_with_time_as_z_axis_scale: 0.1
+
+# Recovery
+ 
+ shrink_horizon_backup: True
+ shrink_horizon_min_duration: 10
+ oscillation_recovery: True
+ oscillation_v_eps: 0.1
+ oscillation_omega_eps: 0.1
+ oscillation_recovery_min_duration: 10
+ oscillation_filter_duration: 10
