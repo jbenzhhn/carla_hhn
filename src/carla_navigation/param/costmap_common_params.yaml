@@ -15,7 +15,7 @@ map_type: costmap
 
 obstacle_layer:
  enabled: true
- obstacle_range: 20
+ obstacle_range: 39
  raytrace_range: 40
  inflation_radius: 2
  track_unknown_space: true
