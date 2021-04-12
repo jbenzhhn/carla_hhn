@@ -11,7 +11,7 @@ TebLocalPlannerROS:
  max_samples: 500 #250
  global_plan_overwrite_orientation: True
  allow_init_with_backwards_motion: False
- max_global_plan_lookahead_dist: 40 #28.0
+ max_global_plan_lookahead_dist: 20 #28.0
  global_plan_viapoint_sep: 1
  global_plan_prune_distance: 1
  exact_arc_length: False
@@ -26,7 +26,7 @@ TebLocalPlannerROS:
  max_vel_x: 10 #25 #7 #13 # 7=12km/h 13=24km/h 18=32km/h 25=45km/h
  max_vel_x_backwards: 1 #2
  max_vel_y: 0.0
- max_vel_theta: 5 #4 #2 the angular velocity is also bounded by min_turning_radius in case of a carlike robot (r = v / omega)
+ max_vel_theta: 7 #4 #2 the angular velocity is also bounded by min_turning_radius in case of a carlike robot (r = v / omega)
  acc_lim_x: 3
  acc_lim_theta: 2 #0.8 #0.5
 
@@ -39,22 +39,22 @@ TebLocalPlannerROS:
 
  footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
    type: "line"
-   line_start: [-1.43, 0] # for type "polygon"
-   line_end: [1.43, 0]
-#vertices: [[-0.2, -1], [-0.2, 1], [3.8, 1], [3.8, -1]] 
+   line_start: [-1.475, 0]
+   line_end: [1.475, 0]
+
  # GoalTolerance
     
- xy_goal_tolerance: 0.7
+ xy_goal_tolerance: 0.1
  yaw_goal_tolerance: 0.35
  free_goal_vel: False
  complete_global_plan: True
     
  # Obstacles
- min_obstacle_dist: 1.40 # This value must also include our robot's expansion, since footprint_model is set to "line".
- inflation_dist: 1.50
+ min_obstacle_dist: 0.925 # This value must also include our robot's expansion, since footprint_model is set to "line".
+ inflation_dist: 2
  include_costmap_obstacles: True
  costmap_obstacles_behind_robot_dist: 1.0
- obstacle_poses_affected: 20
+ obstacle_poses_affected: 15
 
  dynamic_obstacle_inflation_dist: 0.6
  include_dynamic_obstacles: True 
@@ -71,13 +71,13 @@ TebLocalPlannerROS:
  optimization_verbose: False
  penalty_epsilon: 0.1
  obstacle_cost_exponent: 2
- weight_max_vel_x: 10
+ weight_max_vel_x: 1000
  weight_max_vel_theta: 10
- weight_acc_lim_x: 10 #10 #450 #1
- weight_acc_lim_theta: 10 #150
+ weight_acc_lim_x: 500 #10 #450 #1
+ weight_acc_lim_theta: 500 #150
  weight_kinematics_nh: 1000
- weight_kinematics_forward_drive: 10
- weight_kinematics_turning_radius: 1000
+ weight_kinematics_forward_drive: 1000
+ weight_kinematics_turning_radius: 100
  weight_optimaltime: 0.0001 #0.001 #0.005 #1 #1 #0.01 # must be > 0 # ADJUST: 1 -> 0.5
  weight_shortest_path: 0 #2.5 #75 #50 #200 # ADJUST: 0 -> 50 to enforce planning in local area
  weight_obstacle: 1000.0 
@@ -85,9 +85,9 @@ TebLocalPlannerROS:
  weight_obstacle_left: 1000 #10 #2.5 #15
  weight_inflation_right: 10 #0.15 #1 #0.2
  weight_inflation_left: 10 #0.6 #1 #0.2
- weight_dynamic_obstacle: 1000 #250 #800 #25 #50 #250 #175 #150 #50 #150
+ weight_dynamic_obstacle: 50 #250 #800 #25 #50 #250 #175 #150 #50 #150
  weight_dynamic_obstacle_inflation: 0 #0.6
- weight_viapoint: 25 #2.5
+ weight_viapoint: 230 #2.5
  weight_adapt_factor: 3 #3.75
 
  # Homotopy Class Planner
@@ -98,7 +98,7 @@ TebLocalPlannerROS:
  #simple_exploration: False #necessary? -> no
  max_number_classes: 3
  selection_cost_hysteresis: 1 #0.8 # ADJUST: 1 -> 0.8 select new trajectory if new_cost < selection_cost_hysteresis*old_cost. Causes lower chance of changing plan.
- selection_prefer_initial_plan: 1
+ selection_prefer_initial_plan: 0.95
  selection_obst_cost_scale: 1 #1.5 #0.75 #1.5 #0.5 #1.0
  selection_alternative_time_cost: False
 

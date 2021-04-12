@@ -39,10 +39,6 @@ rospy.init_node('ego_vehicle_spawner')
 # running.
 world = client.get_world()
 
-settings = world.get_settings()
-settings.fixed_delta_seconds = 0.05
-world.apply_settings(settings)
-
 #Check the existing ego vehicles
 spawn_new_ego_vehicle = True
 actor_list = world.get_actors()
@@ -93,11 +89,6 @@ if spawn_new_ego_vehicle == True:
     #Add a center lidar_sensor
     lidar_bp = blueprint_library.find('sensor.lidar.ray_cast')
     lidar_center_transform = carla.Transform(carla.Location(x=0, z=2))
-    lidar_bp.set_attribute('range', str(60))
-    lidar_bp.set_attribute('rotation_frequency', str(20))
-    lidar_bp.set_attribute('points_per_second', str(150000))
-    lidar_bp.set_attribute('lower_fov', str(-15))
-
     lidar_center = world.spawn_actor(lidar_bp, lidar_center_transform, attach_to=vehicle)
 
     print("A new ego vehcile is succesfully spawn!")

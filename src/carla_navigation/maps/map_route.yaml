@@ -1,4 +1,4 @@
-image: ./map_global.png
+image: ./map_with_route.png
 resolution: 0.1
 origin: [-500, -500, 0.000000]
 negate: 0

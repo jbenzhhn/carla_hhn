@@ -2,7 +2,7 @@
 #raytrace_range: 20
 
 #footprint: [[-2, -1.2], [-2, 1.2], [2.5, 1.2], [2.5, -1.2]]
-footprint: [[-1.9, -0.9], [-1.9, 0.9], [1.9, 0.9], [1.9, -0.9]]
+footprint: [[-1.8, -0.8], [-1.8, 0.8], [1.8, 0.8], [1.8, -0.8]]
 #robot_radius: 0.105
 
 #inflation_radius: 1.0
@@ -15,27 +15,22 @@ map_type: costmap
 
 obstacle_layer:
  enabled: true
- obstacle_range: 39
- raytrace_range: 40
- inflation_radius: 2
+ obstacle_range: 10.5
+ raytrace_range: 12.25
+ inflation_radius: 0.7
  track_unknown_space: true
  combination_method: 1
 
  observation_sources: point_cloud_sensor
 
- point_cloud_sensor: {sensor_frame: ego_vehicle/lidar/front, data_type: PointCloud2, topic: /carla/ego_vehicle/lidar/front/point_cloud , marking: true, clearing: true, min_obstacle_height: 0.3, max_obstacle_height: 2} 
+ point_cloud_sensor: {sensor_frame: ego_vehicle2/lidar/front, data_type: PointCloud2, topic: /carla/ego_vehicle/lidar/front/point_cloud , marking: true, clearing: true, min_obstacle_height: 0.3, max_obstacle_height: 2.0} 
 
- laser_scan_sensor: {sensor_frame: ego_vehicle/lidar/front, data_type: LaserScan, topic: /laser_scan, marking: true, clearing: true,min_obstacle_height: -1.5, inf_is_valid: true} #, inf_is_valid: true, min_obstacle_height: 0.0, max_obstacle_height: 5.0}
+#laser_scan_sensor: {sensor_frame: ego_vehicle/lidar/Lidar_center, data_type: LaserScan, topic: /laser_scan, marking: true, clearing: true} #, inf_is_valid: true, min_obstacle_height: 0.0, max_obstacle_height: 5.0}
 
-inflation_layer_global:
+inflation_layer:
   enabled:              true
   cost_scaling_factor:  3 #10.0  # exponential rate at which the obstacle cost drops off (default: 10)
-  inflation_radius:     4 #1.75  # max. distance from an obstacle at which costs are incurred for planning paths.
-
-inflation_layer_local:
-  enabled:              true
-  cost_scaling_factor:  3 #10.0  # exponential rate at which the obstacle cost drops off (default: 10)
-  inflation_radius:     0.2 #1.75  # max. distance from an obstacle at which costs are incurred for planning paths.
+  inflation_radius:     2 #1.75  # max. distance from an obstacle at which costs are incurred for planning paths.
 
 static_layer:
   enabled:              true
